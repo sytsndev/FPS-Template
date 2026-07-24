@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="PlayerRes" format=3 uid="uid://4g0po8ces2vo"]
+
+[ext_resource type="Script" uid="uid://b2014t34yvg7" path="res://Player/Resources/Scripts/player_res.gd" id="1_2ryly"]
+
+[resource]
+script = ExtResource("1_2ryly")
+mouse_sens = 0.001
+metadata/_custom_type_script = "uid://b2014t34yvg7"

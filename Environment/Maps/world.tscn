@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://b4v71aogtu3qe"]
+
+[ext_resource type="Texture2D" uid="uid://bhvh10h14wie8" path="res://icon.svg" id="1_x56lj"]
+[ext_resource type="PackedScene" uid="uid://bvs5pa253asic" path="res://Player/player.tscn" id="2_2hbmw"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2hbmw"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_abuvq"]
+sky_material = SubResource("ProceduralSkyMaterial_2hbmw")
+
+[sub_resource type="Environment" id="Environment_rsc6e"]
+background_mode = 2
+sky = SubResource("Sky_abuvq")
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2hbmw"]
+albedo_texture = ExtResource("1_x56lj")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_khhxn"]
+size = Vector2(100, 100)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_2hbmw"]
+data = PackedVector3Array(50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, 50, -50, 0, -50, 50, 0, -50)
+
+[node name="World" type="Node3D" unique_id=880998428]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1750577335]
+environment = SubResource("Environment_rsc6e")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1815213072]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1089318448]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.09103584, 0.035751343, -0.035072327)
+material_override = SubResource("StandardMaterial3D_2hbmw")
+mesh = SubResource("PlaneMesh_khhxn")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=1515557204]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=38479131]
+shape = SubResource("ConcavePolygonShape3D_2hbmw")
+
+[node name="Player" parent="." unique_id=1866795079 instance=ExtResource("2_2hbmw")]
