@@ -14,8 +14,12 @@ func physics_update(delta: float) -> void:
 	else:
 		player.velocity.y += player.player_res.gravity * delta
 	player.move_and_slide()
-
+	
+	if Input.is_action_just_pressed("jump") and player.player_res.max_double_jump_count > player.d_jump_count:
+		player.d_jump_count += 1
+		finished.emit(JUMPING)
 	if player.is_on_floor():
+		player.d_jump_count = 0
 		if is_equal_approx(input_dir.x, 0.0) && is_equal_approx(input_dir.y, 0.0):
 			finished.emit(IDLE)
 		else:

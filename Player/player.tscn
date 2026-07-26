@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://d8j3cnaa1equ" path="res://Player/States/idle.gd" id="3_vtle1"]
 [ext_resource type="Script" uid="uid://cjnvsygxiw5ii" path="res://Player/States/jumping.gd" id="4_od3ui"]
 [ext_resource type="Script" uid="uid://bd1o3e1mpvsf" path="res://Player/States/running.gd" id="5_00tjw"]
+[ext_resource type="Script" uid="uid://bgypvlgxfxdf3" path="res://Player/States/sprint.gd" id="8_od3ui"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_s1fef"]
 
@@ -47,6 +48,9 @@ script = ExtResource("4_od3ui")
 
 [node name="Running" type="Node" parent="StateMachine" unique_id=2135166823]
 script = ExtResource("5_00tjw")
+
+[node name="Sprint" type="Node" parent="StateMachine" unique_id=1443609635]
+script = ExtResource("8_od3ui")
 
 [node name="Neck" type="Node3D" parent="." unique_id=825116909]
 

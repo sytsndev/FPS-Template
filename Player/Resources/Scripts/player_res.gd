@@ -13,7 +13,11 @@ extends Resource
 
 @export_category("Player Movement Stats")
 @export var speed: float = 10.0
+@export var sprint_speed: float = 14.0
 @export var crouch_speed: float = 6.0
 @export var gravity: float = -40.0
 @export var jump_gravity: float = -20.0
 @export var jump_impulse: float = 10.0
+
+@export_category("Player Movement Variables")
+@export var max_double_jump_count: float = 1

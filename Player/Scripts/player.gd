@@ -1,12 +1,5 @@
 class_name Player extends CharacterBody3D
 
-var speed := 10.0
-var crouch_speed := 5.0
-var gravity := -40.0
-var jump_gravity := -20.0
-var jump_impulse := 10.0
-var is_paused: bool = false
-
 
 @export_category("Toggles")
 @export var crouch: bool
@@ -25,8 +18,13 @@ var is_paused: bool = false
 @export var collision_shape: CollisionShape3D
 @export var player_mesh: MeshInstance3D
 
+
 var is_crouching: bool = false
 var exiting_crouching: bool = false
+
+var d_jump_count: int = 0
+
+var is_paused: bool = false
 
 
 func _ready() -> void:
