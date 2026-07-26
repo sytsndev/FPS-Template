@@ -44,3 +44,18 @@ mesh = SubResource("PlaneMesh_khhxn")
 shape = SubResource("ConcavePolygonShape3D_2hbmw")
 
 [node name="Player" parent="." unique_id=1866795079 instance=ExtResource("2_2hbmw")]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1863013869]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1328377438]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.873, 2.5, -0.299)
+size = Vector3(1, 1, 4.7753906)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=387927943]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.546, 2.6, -0.299)
+size = Vector3(1, 1, 4.7753906)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=94907302]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.766, 1.9, -0.299)
+size = Vector3(1, 1, 4.7753906)

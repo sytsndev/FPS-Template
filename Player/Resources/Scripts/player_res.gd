@@ -1,6 +1,12 @@
 class_name PlayerRes
 extends Resource
 
+
+
+@export_category("Player Setup")
+@export var camera_pos: Vector3
+
+
 @export_category("Player Settings")
 @export var mouse_sens: float
 

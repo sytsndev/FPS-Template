@@ -16,6 +16,7 @@ func _ready() -> void:
 
 
 func update(delta: float) -> void:
+	crouch_inputs()
 	ui_inputs()
 
 
@@ -32,6 +33,19 @@ func handle_input(event: InputEvent) -> void:
 		deg_to_rad(-90),
 		deg_to_rad(90)
 	)
+
+
+func crouch_inputs():
+	player.crouch_shape_cast.force_shapecast_update()
+
+	if player.exiting_crouching and !player.crouch_shape_cast.is_colliding():
+		player.exit_crouch()
+	if Input.is_action_just_pressed("crouch") && player.is_on_floor():
+		player.enter_crouch_ground()
+	if Input.is_action_just_pressed("crouch") && !player.is_crouching:
+		player.enter_crouch_air()
+	if Input.is_action_just_released("crouch"):
+		player.exiting_crouching = true
 
 
 func ui_inputs():
