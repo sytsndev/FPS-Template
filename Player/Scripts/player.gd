@@ -69,3 +69,10 @@ func exit_crouch():
 
 
 #endregion
+
+
+func get_speed():
+	if is_crouching:
+		return player_res.crouch_speed
+	else:
+		return player_res.speed

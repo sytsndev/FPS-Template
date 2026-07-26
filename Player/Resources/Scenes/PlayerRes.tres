@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_2ryly")
-camera_pos = Vector3(0, 1.65, 5)
+camera_pos = Vector3(0, 1.65, 0)
 mouse_sens = 0.001
 metadata/_custom_type_script = "uid://b2014t34yvg7"
