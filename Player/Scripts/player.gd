@@ -18,6 +18,7 @@ class_name Player extends CharacterBody3D
 @export var collision_shape: CollisionShape3D
 @export var player_mesh: MeshInstance3D
 @export var movement: Movement
+@export var camera_lean: CameraLean
 
 
 var is_crouching: bool = false

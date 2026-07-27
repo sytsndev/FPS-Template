@@ -9,7 +9,7 @@ func physics_update(delta: float) -> void:
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	var direction := (player.neck.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
-	player.movement.sprint(direction)
+	player.movement.sprint(direction, delta)
 	
 	if not player.is_on_floor():
 		finished.emit(FALLING)

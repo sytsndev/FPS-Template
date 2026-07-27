@@ -6,5 +6,6 @@
 script = ExtResource("1_2ryly")
 camera_pos = Vector3(0, 1.65, 0)
 mouse_sens = 0.001
+camera_lean = true
 max_double_jump_count = 2.0
 metadata/_custom_type_script = "uid://b2014t34yvg7"
