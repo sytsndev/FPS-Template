@@ -13,14 +13,14 @@ func physics_update(delta: float) -> void:
 	else:
 		player.velocity.x = move_toward(player.velocity.x, 0, player.get_speed())
 		player.velocity.z = move_toward(player.velocity.z, 0, player.get_speed())
-
+	print(player.velocity)
 	player.move_and_slide()
 
 	if not player.is_on_floor():
 		finished.emit(FALLING)
-	elif Input.is_action_just_pressed("jump"):
+	elif player.state_jump():
 		finished.emit(JUMPING)
-	elif Input.is_action_pressed("sprint") and (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right") or Input.is_action_pressed("move_forward" ) or Input.is_action_pressed("move_back")):
+	elif player.state_sprint():
 		finished.emit(SPRINT)
-	elif is_equal_approx(input_dir.x, 0.0) && is_equal_approx(input_dir.y, 0.0):
+	elif player.state_idle(input_dir):
 		finished.emit(IDLE)

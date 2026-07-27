@@ -9,6 +9,7 @@ extends Resource
 
 @export_category("Player Settings")
 @export var mouse_sens: float
+@export var camera_lean: bool
 
 
 @export_category("Player Movement Stats")

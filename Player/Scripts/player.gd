@@ -17,6 +17,7 @@ class_name Player extends CharacterBody3D
 @export var crouch_shape_cast: ShapeCast3D
 @export var collision_shape: CollisionShape3D
 @export var player_mesh: MeshInstance3D
+@export var movement: Movement
 
 
 var is_crouching: bool = false
@@ -66,6 +67,22 @@ func exit_crouch():
 	exiting_crouching = false
 
 
+#endregion
+
+
+#region State Change Checks
+
+func state_jump():
+	return Input.is_action_just_pressed("jump") and player_res.max_double_jump_count > d_jump_count
+
+func state_run():
+	return Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right") or Input.is_action_pressed("move_forward" )or Input.is_action_pressed("move_back")
+
+func state_sprint():
+	return !is_crouching and Input.is_action_pressed("sprint") and (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right") or Input.is_action_pressed("move_forward" ) or Input.is_action_pressed("move_back"))
+
+func state_idle(input_dir: Vector2):
+	return is_equal_approx(input_dir.x, 0.0) && is_equal_approx(input_dir.y, 0.0)
 #endregion
 
 
