@@ -3,6 +3,11 @@ extends Node
 
 @export var player: Player
 
+var is_dashing := false
+var dash_dir := Vector3.ZERO
+var dash_timer := 0.0
+
+
 func stop_move(delta: float):
 	var prev_velocity := player.velocity
 	
@@ -61,6 +66,35 @@ func run(direction: Vector3, delta: float):
 		player.velocity.z = move_toward(player.velocity.z, 0, player.get_speed())
 	print(player.velocity)
 	player.move_and_slide()
+	var acceleration := (player.velocity - prev_velocity) / delta
+
+	if player.player_res.camera_lean:
+		player.camera_lean.update_lean(delta, acceleration, Vector3.UP)
+
+
+func start_dash(direction: Vector3) -> void:
+	if direction == Vector3.ZERO:
+		return
+	
+	is_dashing = true
+	dash_dir = direction.normalized()
+	dash_timer = player.player_res.dash_time
+	player.velocity.y = 0
+	player.velocity = dash_dir * player.player_res.dash_impulse
+
+
+func dash_move(direction: Vector3, delta: float):
+	var prev_velocity := player.velocity
+	
+	if not is_dashing:
+		return
+
+	player.velocity = dash_dir * player.player_res.dash_impulse
+	player.move_and_slide()
+
+	dash_timer -= delta
+	if dash_timer <= 0.0:
+		is_dashing = false
 	var acceleration := (player.velocity - prev_velocity) / delta
 
 	if player.player_res.camera_lean:

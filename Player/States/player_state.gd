@@ -6,6 +6,7 @@ const JUMPING = "Jumping"
 const FALLING = "Falling"
 const SPRINT = "Sprint"
 const DOUBLE_JUMP = "DoubleJump"
+const DASH = "Dash"
 
 
 var player: Player
