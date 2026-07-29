@@ -18,10 +18,11 @@ extends Resource
 @export var crouch_speed: float = 6.0
 @export var gravity: float = -40.0
 @export var jump_gravity: float = -20.0
-@export var jump_impulse: float = 10.0
+@export var jump_impulse: float = 11.0
 @export var dash_impulse: float = 50.0
 @export var dash_time: float = 0.15
 
 
 @export_category("Player Movement Variables")
 @export var max_double_jump_count: float = 1
+@export var max_dash_count: float = 2

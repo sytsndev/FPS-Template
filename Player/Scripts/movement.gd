@@ -73,6 +73,7 @@ func run(direction: Vector3, delta: float):
 
 
 func start_dash(direction: Vector3) -> void:
+	dash_dir = direction
 	if direction == Vector3.ZERO:
 		return
 	
@@ -81,9 +82,9 @@ func start_dash(direction: Vector3) -> void:
 	dash_timer = player.player_res.dash_time
 	player.velocity.y = 0
 	player.velocity = dash_dir * player.player_res.dash_impulse
+	player.dash_count += 1
 
-
-func dash_move(direction: Vector3, delta: float):
+func dash_move(delta: float):
 	var prev_velocity := player.velocity
 	
 	if not is_dashing:

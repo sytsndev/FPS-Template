@@ -10,9 +10,13 @@ func physics_update(delta: float) -> void:
 	var direction := (player.neck.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if !player.movement.is_dashing:
 		player.movement.start_dash(direction)
-	player.movement.dash_move(direction, delta)
+	player.movement.dash_move(delta)
 	
-	if not player.is_on_floor() and !player.movement.is_dashing:
+	if !player.movement.is_dashing:
 		finished.emit(FALLING)
-	elif is_equal_approx(input_dir.x, 0.0) && is_equal_approx(input_dir.y, 0.0):
-		finished.emit(IDLE)
+
+
+func exit() -> void:
+	player.movement.dash_dir = Vector3.ZERO
+	player.velocity = Vector3.ZERO
+	

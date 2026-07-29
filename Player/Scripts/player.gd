@@ -25,6 +25,7 @@ var is_crouching: bool = false
 var exiting_crouching: bool = false
 
 var d_jump_count: int = 0
+var dash_count: int = 0
 
 var is_paused: bool = false
 
