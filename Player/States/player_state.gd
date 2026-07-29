@@ -31,10 +31,10 @@ func handle_input(event: InputEvent) -> void:
 	if !player.is_multiplayer_authority() && player.is_multiplayer: return
 
 	if event is InputEventMouseMotion:
-		player.neck.rotate_y(-event.relative.x * player.player_res.mouse_sens)
+		player.neck.rotate_y(-event.relative.x * player.player_res.mouse_sens * 0.001)
 		player.neck.rotation.x = 0
 		player.neck.rotation.z = 0
-		player.camera.rotate_x(-event.relative.y * player.player_res.mouse_sens)
+		player.camera.rotate_x(-event.relative.y * player.player_res.mouse_sens * 0.001)
 		player.camera.rotation.x = clamp(
 		player.camera.rotation.x,
 		deg_to_rad(-90),

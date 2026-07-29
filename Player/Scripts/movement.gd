@@ -83,6 +83,8 @@ func start_dash(direction: Vector3) -> void:
 	player.velocity.y = 0
 	player.velocity = dash_dir * player.player_res.dash_impulse
 	player.dash_count += 1
+	if player.player_res.dash_reset_jump:
+		player.d_jump_count = 0
 
 func dash_move(delta: float):
 	var prev_velocity := player.velocity

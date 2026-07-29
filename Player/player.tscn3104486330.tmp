@@ -12,7 +12,6 @@
 [ext_resource type="Script" uid="uid://bm2dfwnapb66m" path="res://Player/States/dash.gd" id="9_5htga"]
 [ext_resource type="Script" uid="uid://cijh8hdlcrmye" path="res://Player/Scripts/Camera/camera_lean.gd" id="10_x3vf3"]
 [ext_resource type="Script" uid="uid://dswanda68gj6v" path="res://Player/Scripts/movement.gd" id="11_apopc"]
-[ext_resource type="Script" uid="uid://cdbu1kklfiir6" path="res://Player/Scripts/Camera/camera_manager.gd" id="12_p5o4e"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_s1fef"]
 
@@ -22,7 +21,7 @@ points = PackedVector3Array(-0.5, -0.5, 0, -0.49765074, -0.5, -0.049040705, -0.4
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vtle1"]
 height = 1.0
 
-[node name="Player" type="CharacterBody3D" unique_id=1866795079 node_paths=PackedStringArray("neck", "camera", "crouch_shape_cast", "collision_shape", "player_mesh", "movement", "camera_lean", "camera_manger")]
+[node name="Player" type="CharacterBody3D" unique_id=1866795079 node_paths=PackedStringArray("neck", "camera", "crouch_shape_cast", "collision_shape", "player_mesh", "movement", "camera_lean")]
 script = ExtResource("1_fhl08")
 neck = NodePath("Neck")
 camera = NodePath("Neck/CameraSpring/CameraLean/Camera3D")
@@ -32,7 +31,6 @@ collision_shape = NodePath("CollisionShape3D2")
 player_mesh = NodePath("MeshInstance3D")
 movement = NodePath("Movement")
 camera_lean = NodePath("Neck/CameraSpring/CameraLean")
-camera_manger = NodePath("Neck/CameraSpring/CameraLean/Camera3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1519460414]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -72,7 +70,6 @@ script = ExtResource("9_00tjw")
 script = ExtResource("10_x3vf3")
 
 [node name="Camera3D" type="Camera3D" parent="Neck/CameraSpring/CameraLean" unique_id=48079509]
-script = ExtResource("12_p5o4e")
 
 [node name="CrouchShape" type="ShapeCast3D" parent="." unique_id=302830083]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)

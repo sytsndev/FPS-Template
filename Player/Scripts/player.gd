@@ -19,6 +19,7 @@ class_name Player extends CharacterBody3D
 @export var player_mesh: MeshInstance3D
 @export var movement: Movement
 @export var camera_lean: CameraLean
+@export var camera_manger: CameraManager
 
 
 var is_crouching: bool = false
