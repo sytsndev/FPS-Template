@@ -9,11 +9,11 @@ extends Resource
 
 @export_category("Player Settings")
 @export var mouse_sens: float
-@export var camera_lean: bool
 @export var dash_reset_jump: bool
 
-
 @export_category("Camera Settings")
+@export var c_lean: bool
+@export var c_fov_change: bool
 @export var fov: float = 90.0
 
 

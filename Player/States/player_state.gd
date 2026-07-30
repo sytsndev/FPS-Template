@@ -7,6 +7,7 @@ const FALLING = "Falling"
 const SPRINT = "Sprint"
 const DOUBLE_JUMP = "DoubleJump"
 const DASH = "Dash"
+const SLIDING = "Sliding"
 
 
 var player: Player

@@ -82,7 +82,7 @@ func state_run():
 	return Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right") or Input.is_action_pressed("move_forward" )or Input.is_action_pressed("move_back")
 
 func state_sprint():
-	return !is_crouching and Input.is_action_pressed("sprint") and (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right") or Input.is_action_pressed("move_forward" ) or Input.is_action_pressed("move_back"))
+	return !is_crouching and Input.is_action_pressed("sprint") and (Input.is_action_pressed("move_forward" ))
 
 func state_idle(input_dir: Vector2):
 	return is_equal_approx(input_dir.x, 0.0) && is_equal_approx(input_dir.y, 0.0)

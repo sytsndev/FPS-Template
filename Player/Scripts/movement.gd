@@ -17,7 +17,7 @@ func stop_move(delta: float):
 	player.move_and_slide()
 	var acceleration := (player.velocity - prev_velocity) / delta
 
-	if player.player_res.camera_lean:
+	if player.player_res.c_lean:
 		player.camera_lean.update_lean(delta, acceleration, Vector3.UP)
 
 func fall_move(direction: Vector3, delta: float):
@@ -33,7 +33,7 @@ func fall_move(direction: Vector3, delta: float):
 	player.move_and_slide()
 	var acceleration := (player.velocity - prev_velocity) / delta
 
-	if player.player_res.camera_lean:
+	if player.player_res.c_lean:
 		player.camera_lean.update_lean(delta, acceleration, Vector3.UP)
 
 func jump_move():
@@ -52,7 +52,7 @@ func sprint(direction: Vector3, delta: float):
 	player.move_and_slide()
 	var acceleration := (player.velocity - prev_velocity) / delta
 
-	if player.player_res.camera_lean:
+	if player.player_res.c_lean:
 		player.camera_lean.update_lean(delta, acceleration, Vector3.UP)
 
 
@@ -68,9 +68,24 @@ func run(direction: Vector3, delta: float):
 	player.move_and_slide()
 	var acceleration := (player.velocity - prev_velocity) / delta
 
-	if player.player_res.camera_lean:
+	if player.player_res.c_lean:
 		player.camera_lean.update_lean(delta, acceleration, Vector3.UP)
 
+
+func move(direction: Vector3, delta: float, speed: float):
+	var prev_velocity := player.velocity
+	if direction:
+		player.velocity.x = direction.x * speed
+		player.velocity.z = direction.z * speed
+	else:
+		player.velocity.x = move_toward(player.velocity.x, 0, speed)
+		player.velocity.z = move_toward(player.velocity.z, 0, speed)
+	player.move_and_slide()
+	var acceleration := (player.velocity - prev_velocity) / delta
+
+	if player.player_res.c_lean:
+		player.camera_lean.update_lean(delta, acceleration, Vector3.UP)
+		
 
 func start_dash(direction: Vector3) -> void:
 	dash_dir = direction
@@ -100,5 +115,5 @@ func dash_move(delta: float):
 		is_dashing = false
 	var acceleration := (player.velocity - prev_velocity) / delta
 
-	if player.player_res.camera_lean:
+	if player.player_res.c_lean:
 		player.camera_lean.update_lean(delta, acceleration, Vector3.UP)
