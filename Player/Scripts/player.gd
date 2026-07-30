@@ -76,16 +76,31 @@ func exit_crouch():
 #region State Change Checks
 
 func state_jump():
+	if !double_jump and !is_on_floor():
+		return false
 	return Input.is_action_just_pressed("jump") and player_res.max_double_jump_count > d_jump_count
 
 func state_run():
 	return Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right") or Input.is_action_pressed("move_forward" )or Input.is_action_pressed("move_back")
 
 func state_sprint():
+	if !sprint:
+		return false
 	return !is_crouching and Input.is_action_pressed("sprint") and (Input.is_action_pressed("move_forward" ))
 
 func state_idle(input_dir: Vector2):
 	return is_equal_approx(input_dir.x, 0.0) && is_equal_approx(input_dir.y, 0.0)
+
+func state_slide():
+	if !slide or !crouch:
+		return false
+	return Input.is_action_just_pressed("crouch")
+
+func state_dash():
+	if !dash:
+		return false
+	return Input.is_action_just_pressed("dash") and dash_count < player_res.max_dash_count
+
 #endregion
 
 

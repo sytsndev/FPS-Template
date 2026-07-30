@@ -21,7 +21,8 @@ func _ready() -> void:
 
 
 func update(delta: float) -> void:
-	crouch_inputs()
+	if player.crouch:
+		crouch_inputs()
 	ui_inputs()
 	if player.is_on_floor() and (player.dash_count > 0 or player.d_jump_count > 0):
 		player.dash_count = 0
