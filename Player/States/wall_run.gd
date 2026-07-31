@@ -33,7 +33,6 @@ func physics_update(delta: float) -> void:
 			#finished.emit(RUNNING)
 
 func exit() -> void:
-	wall_run_timer = wall_run_delay
 	match wr_info.rays:
 		"Left":
 			for ray in player.left_wall_run_rays:
@@ -46,3 +45,4 @@ func exit() -> void:
 				player.wall_run_container.add_child(ray)
 				ray.rotation = Vector3.ZERO
 	player.camera_manager.smooth_rot_camera(Vector3.ZERO)
+	player.wr_reset_timer = player.player_res.wall_run_delay

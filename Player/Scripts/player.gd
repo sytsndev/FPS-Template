@@ -30,6 +30,7 @@ var exiting_crouching: bool = false
 
 var d_jump_count: int = 0
 var dash_count: int = 0
+var wr_reset_timer: float = 0.0
 
 var is_paused: bool = false
 
@@ -37,6 +38,12 @@ var is_paused: bool = false
 func _ready() -> void:
 	setup()
 
+
+func _process(delta: float) -> void:
+	if wr_reset_timer > 0.0:
+		wr_reset_timer -= delta
+		if wr_reset_timer <= 0.0:
+			wr_reset_timer = 0.0
 
 #region Setup
 
@@ -105,7 +112,7 @@ func state_dash():
 	return Input.is_action_just_pressed("dash") and dash_count < player_res.max_dash_count
 
 func state_wall_run():
-	return left_wall_run_rays.all(func(ray): return ray.is_colliding()) or right_wall_run_rays.all(func(ray): return ray.is_colliding())
+	return (left_wall_run_rays.all(func(ray): return ray.is_colliding()) or right_wall_run_rays.all(func(ray): return ray.is_colliding())) and wr_reset_timer == 0.0
 
 #endregion
 

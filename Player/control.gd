@@ -6,4 +6,4 @@ extends Control
 
 
 func _process(delta: float) -> void:
-	wall_run_timer.text = str(wall_run.wall_run_timer)
+	pass

@@ -12,10 +12,6 @@ const WALL_RUN = "WallRun"
 
 var player: Player
 
-var wall_run_delay: float = 1
-var wall_run_timer: float
-
-
 func _ready() -> void:
 	await owner.ready
 	player = owner as Player
@@ -30,11 +26,7 @@ func update(delta: float) -> void:
 	if player.is_on_floor() and (player.dash_count > 0 or player.d_jump_count > 0):
 		player.dash_count = 0
 		player.d_jump_count = 0
-	if wall_run_timer > 0.0:
-		wall_run_timer -= delta
-		if wall_run_timer <= 0.0:
-			print("etest")
-	
+
 
 func handle_input(event: InputEvent) -> void:
 	if !player.is_multiplayer_authority() && player.is_multiplayer: return

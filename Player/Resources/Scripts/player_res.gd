@@ -27,6 +27,7 @@ extends Resource
 @export var jump_impulse: float = 11.0
 @export var dash_impulse: float = 50.0
 @export var dash_time: float = 0.15
+@export var wall_run_delay: float = 0.5
 
 
 @export_category("Player Movement Variables")
