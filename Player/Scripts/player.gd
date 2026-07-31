@@ -12,15 +12,18 @@ class_name Player extends CharacterBody3D
 
 @export_category("Nodes")
 @export var neck: Node3D
-@export var camera: Camera3D
+@export var camera: Node3D
 @export var player_res: PlayerRes
 @export var crouch_shape_cast: ShapeCast3D
 @export var collision_shape: CollisionShape3D
 @export var player_mesh: MeshInstance3D
 @export var movement: Movement
 @export var camera_lean: CameraLean
-@export var camera_manger: CameraManager
+@export var camera_manager: CameraManager
+@export var left_wall_run_rays: Array[RayCast3D]
+@export var right_wall_run_rays: Array[RayCast3D]
 
+@onready var wall_run_container: Node3D = $Neck/WallRun
 
 var is_crouching: bool = false
 var exiting_crouching: bool = false
@@ -100,6 +103,9 @@ func state_dash():
 	if !dash:
 		return false
 	return Input.is_action_just_pressed("dash") and dash_count < player_res.max_dash_count
+
+func state_wall_run():
+	return left_wall_run_rays.all(func(ray): return ray.is_colliding()) or right_wall_run_rays.all(func(ray): return ray.is_colliding())
 
 #endregion
 

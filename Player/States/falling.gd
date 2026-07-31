@@ -7,6 +7,8 @@ func physics_update(delta: float) -> void:
 	var direction := (player.neck.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	player.movement.fall_move(direction, delta)
 	
+	if player.state_wall_run() and !(wall_run_timer > 0.0):
+		finished.emit(WALL_RUN)
 	if player.state_dash():
 		finished.emit(DASH)
 	if player.state_jump():

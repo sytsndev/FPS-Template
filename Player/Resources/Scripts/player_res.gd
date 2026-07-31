@@ -10,6 +10,7 @@ extends Resource
 @export_category("Player Settings")
 @export var mouse_sens: float
 @export var dash_reset_jump: bool
+@export var wall_run_reset_jump: bool
 
 @export_category("Camera Settings")
 @export var c_lean: bool

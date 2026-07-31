@@ -8,10 +8,12 @@ const SPRINT = "Sprint"
 const DOUBLE_JUMP = "DoubleJump"
 const DASH = "Dash"
 const SLIDING = "Sliding"
-
+const WALL_RUN = "WallRun"
 
 var player: Player
 
+var wall_run_delay: float = 1
+var wall_run_timer: float = 0.0
 
 func _ready() -> void:
 	await owner.ready
@@ -21,13 +23,18 @@ func _ready() -> void:
 
 
 func update(delta: float) -> void:
+	print(wall_run_timer)
 	if player.crouch:
 		crouch_inputs()
 	ui_inputs()
 	if player.is_on_floor() and (player.dash_count > 0 or player.d_jump_count > 0):
 		player.dash_count = 0
 		player.d_jump_count = 0
-
+	if wall_run_timer > 0.0:
+		wall_run_timer -= delta
+		if wall_run_timer <= 0.0:
+			wall_run_timer = 0.0
+	
 
 func handle_input(event: InputEvent) -> void:
 	if !player.is_multiplayer_authority() && player.is_multiplayer: return

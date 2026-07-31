@@ -3,6 +3,7 @@ extends Node
 
 @export var player: Player
 
+#DASHING
 var is_dashing := false
 var dash_dir := Vector3.ZERO
 var dash_timer := 0.0
@@ -64,7 +65,6 @@ func run(direction: Vector3, delta: float):
 	else:
 		player.velocity.x = move_toward(player.velocity.x, 0, player.get_speed())
 		player.velocity.z = move_toward(player.velocity.z, 0, player.get_speed())
-	print(player.velocity)
 	player.move_and_slide()
 	var acceleration := (player.velocity - prev_velocity) / delta
 
@@ -82,10 +82,10 @@ func move(direction: Vector3, delta: float, speed: float):
 		player.velocity.z = move_toward(player.velocity.z, 0, speed)
 	player.move_and_slide()
 	var acceleration := (player.velocity - prev_velocity) / delta
-
+	
 	if player.player_res.c_lean:
 		player.camera_lean.update_lean(delta, acceleration, Vector3.UP)
-		
+
 
 func start_dash(direction: Vector3) -> void:
 	dash_dir = direction
@@ -117,3 +117,40 @@ func dash_move(delta: float):
 
 	if player.player_res.c_lean:
 		player.camera_lean.update_lean(delta, acceleration, Vector3.UP)
+
+
+func enter_wall_run():
+	if player.left_wall_run_rays.all(func(ray): return ray.is_colliding()):
+		var wall_normal = player.left_wall_run_rays[0].get_collision_normal()
+		return get_wall_info(wall_normal, "Left")
+		
+	if player.right_wall_run_rays.all(func(ray): return ray.is_colliding()):
+		var wall_normal = player.right_wall_run_rays[0].get_collision_normal()
+		return get_wall_info(wall_normal, "Right")
+
+func get_wall_info(wall_normal: Vector3, side: String):
+	var wall_up = (Vector3.UP - Vector3.UP.project(wall_normal.normalized())).normalized()
+	var along_wall: Vector3 = Vector3.UP.cross(wall_normal).normalized()
+	var rays: String = ""
+	match side:
+		"Left":
+			for ray in player.left_wall_run_rays:
+				var rot = ray.global_rotation
+				player.wall_run_container.remove_child(ray)
+				player.add_child(ray)
+				ray.rotation = rot
+				rays = side
+		"Right":
+			along_wall = -along_wall
+			for ray in player.right_wall_run_rays:
+				var rot = ray.global_rotation
+				player.wall_run_container.remove_child(ray)
+				player.add_child(ray)
+				ray.rotation = rot
+				rays = side
+	return {
+		"wall_normal": wall_normal,
+		"wall_up": wall_up,
+		"run_dir": along_wall,
+		"rays": rays
+	}

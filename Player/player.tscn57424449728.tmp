@@ -24,7 +24,7 @@ points = PackedVector3Array(-0.5, -0.5, 0, -0.49765074, -0.5, -0.049040705, -0.4
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vtle1"]
 height = 1.0
 
-[node name="Player" type="CharacterBody3D" unique_id=1866795079 node_paths=PackedStringArray("neck", "camera", "crouch_shape_cast", "collision_shape", "player_mesh", "movement", "camera_lean", "camera_manager", "left_wall_run_rays", "right_wall_run_rays")]
+[node name="Player" type="CharacterBody3D" unique_id=1866795079 node_paths=PackedStringArray("neck", "camera", "crouch_shape_cast", "collision_shape", "player_mesh", "movement", "camera_lean", "camera_manger", "left_wall_run_rays", "right_wall_run_rays")]
 script = ExtResource("1_fhl08")
 crouch = true
 sprint = true
@@ -33,14 +33,14 @@ slide = true
 dash = true
 double_jump = true
 neck = NodePath("Neck")
-camera = NodePath("Neck/CameraSpring/CameraLean/CameraContainer")
+camera = NodePath("Neck/CameraSpring/CameraLean/Camera3D")
 player_res = ExtResource("2_vtle1")
 crouch_shape_cast = NodePath("CrouchShape")
 collision_shape = NodePath("CollisionShape3D2")
 player_mesh = NodePath("MeshInstance3D")
 movement = NodePath("Movement")
 camera_lean = NodePath("Neck/CameraSpring/CameraLean")
-camera_manager = NodePath("Neck/CameraSpring/CameraLean/CameraContainer/Camera3D")
+camera_manger = NodePath("Neck/CameraSpring/CameraLean/Camera3D")
 left_wall_run_rays = [NodePath("Neck/WallRun/LeftLow"), NodePath("Neck/WallRun/LeftHigh")]
 right_wall_run_rays = [NodePath("Neck/WallRun/RightLow"), NodePath("Neck/WallRun/RightHigh")]
 
@@ -87,27 +87,25 @@ script = ExtResource("9_00tjw")
 [node name="CameraLean" type="Node3D" parent="Neck/CameraSpring" unique_id=730655355]
 script = ExtResource("10_x3vf3")
 
-[node name="CameraContainer" type="Node3D" parent="Neck/CameraSpring/CameraLean" unique_id=373691270]
-
-[node name="Camera3D" type="Camera3D" parent="Neck/CameraSpring/CameraLean/CameraContainer" unique_id=48079509]
+[node name="Camera3D" type="Camera3D" parent="Neck/CameraSpring/CameraLean" unique_id=48079509]
 fov = 90.0
 script = ExtResource("12_p5o4e")
 
 [node name="WallRun" type="Node3D" parent="Neck" unique_id=1001257661]
 
 [node name="LeftLow" type="RayCast3D" parent="Neck/WallRun" unique_id=1031116564]
-target_position = Vector3(-0.6, 0, 0)
+target_position = Vector3(-1, 0, 0)
 
 [node name="LeftHigh" type="RayCast3D" parent="Neck/WallRun" unique_id=530141485]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-target_position = Vector3(-0.6, 0, 0)
+target_position = Vector3(-1, 0, 0)
 
 [node name="RightLow" type="RayCast3D" parent="Neck/WallRun" unique_id=1380608570]
-target_position = Vector3(0.6, 0, 0)
+target_position = Vector3(1, 0, 0)
 
 [node name="RightHigh" type="RayCast3D" parent="Neck/WallRun" unique_id=174029876]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-target_position = Vector3(0.6, 0, 0)
+target_position = Vector3(1, 0, 0)
 
 [node name="CrouchShape" type="ShapeCast3D" parent="." unique_id=302830083]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)

@@ -2,7 +2,7 @@ extends PlayerState
 
 func enter(previous_state_path: String, data := {}) -> void:
 	if player.player_res.c_fov_change:
-		player.camera_manger.smooth_change_fov(player.player_res.fov * 1.1)
+		player.camera_manager.smooth_change_fov(player.player_res.fov * 1.1)
 	#player.animation_player.play("run")
 	pass
 
@@ -30,5 +30,5 @@ func physics_update(delta: float) -> void:
 
 func exit() -> void:
 	if player.player_res.c_fov_change:
-		player.camera_manger.smooth_change_fov(player.player_res.fov)
+		player.camera_manager.smooth_change_fov(player.player_res.fov)
 	

@@ -24,7 +24,7 @@ points = PackedVector3Array(-0.5, -0.5, 0, -0.49765074, -0.5, -0.049040705, -0.4
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vtle1"]
 height = 1.0
 
-[node name="Player" type="CharacterBody3D" unique_id=1866795079 node_paths=PackedStringArray("neck", "camera", "crouch_shape_cast", "collision_shape", "player_mesh", "movement", "camera_lean", "camera_manager", "left_wall_run_rays", "right_wall_run_rays")]
+[node name="Player" type="CharacterBody3D" unique_id=1866795079 node_paths=PackedStringArray("neck", "camera", "crouch_shape_cast", "collision_shape", "player_mesh", "movement", "camera_lean", "left_wall_run_rays", "right_wall_run_rays")]
 script = ExtResource("1_fhl08")
 crouch = true
 sprint = true
@@ -40,7 +40,6 @@ collision_shape = NodePath("CollisionShape3D2")
 player_mesh = NodePath("MeshInstance3D")
 movement = NodePath("Movement")
 camera_lean = NodePath("Neck/CameraSpring/CameraLean")
-camera_manager = NodePath("Neck/CameraSpring/CameraLean/CameraContainer/Camera3D")
 left_wall_run_rays = [NodePath("Neck/WallRun/LeftLow"), NodePath("Neck/WallRun/LeftHigh")]
 right_wall_run_rays = [NodePath("Neck/WallRun/RightLow"), NodePath("Neck/WallRun/RightHigh")]
 
