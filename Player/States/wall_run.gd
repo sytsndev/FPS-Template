@@ -3,6 +3,7 @@ extends PlayerState
 var wr_info
 
 func enter(previous_state_path: String, data := {}) -> void:
+	print("enter")
 	player.velocity.y = 0
 	if player.player_res.wall_run_reset_jump:
 		player.dash_count = 0
@@ -16,14 +17,13 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 
 func physics_update(delta: float) -> void:
-	print("ENTER")
 	#var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	#var direction := (player.neck.basis * Vector3(input_dir.x, 0, input_dir.y)).nalized(
 	player.movement.move(wr_info.run_dir, delta, player.player_res.speed)
 	
 	if Input.is_action_just_pressed("jump"):
 		finished.emit(JUMPING)
-	if Input.is_action_just_pressed("move_back") or Input.is_action_just_pressed("move_left") or Input.is_action_just_pressed("move_right") or !player.state_wall_run():
+	if Input.is_action_just_pressed("move_back")or !player.state_wall_run():
 		finished.emit(FALLING)
 	#if player.is_on_floor():
 		#player.d_jump_count = 0

@@ -39,6 +39,8 @@ func fall_move(direction: Vector3, delta: float):
 
 func jump_move():
 	player.velocity.y = player.player_res.jump_impulse
+	player.move_and_slide()
+	
 
 
 func sprint(direction: Vector3, delta: float):

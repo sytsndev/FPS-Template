@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://dswanda68gj6v" path="res://Player/Scripts/movement.gd" id="11_apopc"]
 [ext_resource type="Script" uid="uid://dvddh4ejtaq1r" path="res://Player/States/wall_run.gd" id="11_dkpta"]
 [ext_resource type="Script" uid="uid://cdbu1kklfiir6" path="res://Player/Scripts/Camera/camera_manager.gd" id="12_p5o4e"]
+[ext_resource type="Script" uid="uid://c2nd28uhevxrj" path="res://Player/control.gd" id="16_lfmf2"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_s1fef"]
 
@@ -52,8 +53,9 @@ mesh = SubResource("CapsuleMesh_s1fef")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("ConvexPolygonShape3D_hvfyp")
 
-[node name="StateMachine" type="Node" parent="." unique_id=1155428803]
+[node name="StateMachine" type="Node" parent="." unique_id=1155428803 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("1_k53q1")
+initial_state = NodePath("Idle")
 
 [node name="Falling" type="Node" parent="StateMachine" unique_id=136277759]
 script = ExtResource("2_fhl08")
@@ -118,3 +120,19 @@ collide_with_areas = true
 [node name="Movement" type="Node3D" parent="." unique_id=1062839558 node_paths=PackedStringArray("player")]
 script = ExtResource("11_apopc")
 player = NodePath("..")
+
+[node name="Control" type="Control" parent="." unique_id=1156503011 node_paths=PackedStringArray("wall_run_timer", "wall_run")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 41.0
+offset_top = 17.0
+offset_right = 382.0
+offset_bottom = 108.0
+script = ExtResource("16_lfmf2")
+wall_run_timer = NodePath("WallRunTimer")
+wall_run = NodePath("../StateMachine/WallRun")
+
+[node name="WallRunTimer" type="Label" parent="Control" unique_id=1492113593]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

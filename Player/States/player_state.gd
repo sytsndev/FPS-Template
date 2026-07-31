@@ -13,7 +13,8 @@ const WALL_RUN = "WallRun"
 var player: Player
 
 var wall_run_delay: float = 1
-var wall_run_timer: float = 0.0
+var wall_run_timer: float
+
 
 func _ready() -> void:
 	await owner.ready
@@ -23,7 +24,6 @@ func _ready() -> void:
 
 
 func update(delta: float) -> void:
-	print(wall_run_timer)
 	if player.crouch:
 		crouch_inputs()
 	ui_inputs()
@@ -33,7 +33,7 @@ func update(delta: float) -> void:
 	if wall_run_timer > 0.0:
 		wall_run_timer -= delta
 		if wall_run_timer <= 0.0:
-			wall_run_timer = 0.0
+			print("etest")
 	
 
 func handle_input(event: InputEvent) -> void:
