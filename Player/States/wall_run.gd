@@ -23,7 +23,7 @@ func physics_update(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("jump"):
 		finished.emit(JUMPING)
-	if Input.is_action_just_pressed("move_back")or !player.state_wall_run():
+	if Input.is_action_just_pressed("move_back") or !player.state_wall_run or (Input.is_action_just_pressed("move_right") if wr_info.rays == "Left" else Input.is_action_just_pressed("move_left")):
 		finished.emit(FALLING)
 	#if player.is_on_floor():
 		#player.d_jump_count = 0

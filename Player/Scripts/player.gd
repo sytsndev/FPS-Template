@@ -40,10 +40,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if wr_reset_timer > 0.0:
-		wr_reset_timer -= delta
-		if wr_reset_timer <= 0.0:
-			wr_reset_timer = 0.0
+	wall_run_timer(delta)
+
 
 #region Setup
 
@@ -112,6 +110,8 @@ func state_dash():
 	return Input.is_action_just_pressed("dash") and dash_count < player_res.max_dash_count
 
 func state_wall_run():
+	if !wall_run:
+		return false
 	return (left_wall_run_rays.all(func(ray): return ray.is_colliding()) or right_wall_run_rays.all(func(ray): return ray.is_colliding())) and wr_reset_timer == 0.0
 
 #endregion
@@ -122,3 +122,11 @@ func get_speed():
 		return player_res.crouch_speed
 	else:
 		return player_res.speed
+
+func wall_run_timer(delta: float):
+	if is_on_floor():
+		wr_reset_timer = 0.0
+	if wr_reset_timer > 0.0:
+		wr_reset_timer -= delta
+		if wr_reset_timer <= 0.0:
+			wr_reset_timer = 0.0

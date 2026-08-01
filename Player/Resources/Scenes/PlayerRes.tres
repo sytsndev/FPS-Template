@@ -9,5 +9,5 @@ mouse_sens = 0.8
 wall_run_reset_jump = true
 c_lean = true
 c_fov_change = true
-max_double_jump_count = 2.0
+max_dash_count = 1.0
 metadata/_custom_type_script = "uid://b2014t34yvg7"
