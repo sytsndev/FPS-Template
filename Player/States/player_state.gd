@@ -20,7 +20,7 @@ func _ready() -> void:
 
 
 func update(delta: float) -> void:
-	if player.crouch:
+	if player.player_res.crouch:
 		crouch_inputs()
 	ui_inputs()
 	if player.is_on_floor() and (player.dash_count > 0 or player.d_jump_count > 0):

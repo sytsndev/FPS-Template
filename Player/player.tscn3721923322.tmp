@@ -27,6 +27,12 @@ height = 1.0
 
 [node name="Player" type="CharacterBody3D" unique_id=1866795079 node_paths=PackedStringArray("neck", "camera", "crouch_shape_cast", "collision_shape", "player_mesh", "movement", "camera_lean", "camera_manager", "left_wall_run_rays", "right_wall_run_rays")]
 script = ExtResource("1_fhl08")
+crouch = true
+sprint = true
+wall_run = true
+slide = true
+dash = true
+double_jump = true
 neck = NodePath("Neck")
 camera = NodePath("Neck/CameraSpring/CameraLean/CameraContainer")
 player_res = ExtResource("2_vtle1")

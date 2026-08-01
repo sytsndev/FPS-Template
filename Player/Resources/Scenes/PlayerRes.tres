@@ -5,6 +5,12 @@
 [resource]
 script = ExtResource("1_2ryly")
 camera_pos = Vector3(0, 1.65, 0)
+crouch = true
+sprint = true
+wall_run = true
+slide = true
+dash = true
+double_jump = true
 mouse_sens = 0.8
 wall_run_reset_jump = true
 c_lean = true

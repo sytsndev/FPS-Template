@@ -1,10 +1,22 @@
 class_name PlayerRes
 extends Resource
 
+enum SlideType { 
+	DASH_SLIDE,
+	GLIDE_SLIDE
+	}
 
 
 @export_category("Player Setup")
 @export var camera_pos: Vector3
+
+@export_category("Toggles")
+@export var crouch: bool
+@export var sprint: bool
+@export var wall_run: bool
+@export var slide: bool
+@export var dash: bool
+@export var double_jump: bool
 
 @export_category("Player Settings")
 @export var mouse_sens: float
@@ -33,6 +45,12 @@ extends Resource
 @export_category("Dash")
 @export var dash_impulse: float = 50.0
 @export var dash_time: float = 0.15
+
+@export_category("Sliding")
+@export var slide_impulse: float = 16.0
+@export var slide_time: float = 0.5
+@export var slide_type: SlideType
+@export var slide_delay: float = 5.0
 
 @export_category("General")
 @export var gravity: float = -40.0

@@ -8,6 +8,10 @@ var is_dashing := false
 var dash_dir := Vector3.ZERO
 var dash_timer := 0.0
 
+var is_sliding := false
+var slide_dir := Vector3.ZERO
+var slide_timer := 0.0
+var slide_speed: float = 0.0
 
 func stop_move(delta: float):
 	var prev_velocity := player.velocity
@@ -121,6 +125,44 @@ func dash_move(delta: float):
 		player.camera_lean.update_lean(delta, acceleration, Vector3.UP)
 
 
+func start_slide(direction: Vector3) -> void:
+	slide_dir = direction
+	if direction == Vector3.ZERO:
+		return
+	
+	if player.slide_reset_timer <= 0.0:
+		slide_speed = player.player_res.slide_impulse
+	elif Input.is_action_pressed("sprint"):
+		slide_speed = player.player_res.sprint_speed
+	else:
+		slide_speed = player.player_res.speed
+	
+	is_sliding = true
+	slide_dir = direction.normalized()
+	slide_timer = player.player_res.slide_time
+	player.velocity.y = 0
+	player.velocity = slide_dir * slide_speed
+
+
+func slide_move(delta: float):
+	var prev_velocity := player.velocity
+	
+	if not is_sliding:
+		return
+	
+	player.velocity = slide_dir * slide_speed
+
+	player.move_and_slide()
+
+	slide_timer -= delta
+	if slide_timer <= 0.0:
+		is_sliding = false
+	var acceleration := (player.velocity - prev_velocity) / delta
+
+	if player.player_res.c_lean:
+		player.camera_lean.update_lean(delta, acceleration, Vector3.UP)
+
+
 func enter_wall_run():
 	if player.left_wall_run_rays.all(func(ray): return ray.is_colliding()):
 		var wall_normal = player.left_wall_run_rays[0].get_collision_normal()
@@ -129,6 +171,7 @@ func enter_wall_run():
 	if player.right_wall_run_rays.all(func(ray): return ray.is_colliding()):
 		var wall_normal = player.right_wall_run_rays[0].get_collision_normal()
 		return get_wall_info(wall_normal, "Right")
+
 
 func get_wall_info(wall_normal: Vector3, side: String):
 	var wall_up = (Vector3.UP - Vector3.UP.project(wall_normal.normalized())).normalized()
