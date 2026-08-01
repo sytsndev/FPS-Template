@@ -60,6 +60,8 @@ func dash_exit_checks():
 
 
 func exit() -> void:
+	if !Input.is_action_pressed("crouch"):
+		player.exit_crouch()
 	if player.slide_reset_timer <= 0.0:
 		player.slide_reset_timer = player.player_res.slide_delay
 	print(player.slide_reset_timer)

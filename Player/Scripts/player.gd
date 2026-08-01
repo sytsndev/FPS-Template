@@ -66,6 +66,8 @@ func  enter_crouch_air():
 
 
 func exit_crouch():
+	if movement.is_sliding:
+		return
 	is_crouching = false
 	collision_shape.scale.y = collision_shape.scale.y * 1.5
 	camera.position = player_res.camera_pos
