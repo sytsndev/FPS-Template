@@ -18,6 +18,8 @@ func physics_update(delta: float) -> void:
 	if player.state_jump():
 		player.d_jump_count += 1
 		finished.emit(JUMPING)
+	if player.state_grapple():
+		finished.emit(GRAPPLE)
 	if player.is_on_floor():
 		player.d_jump_count = 0
 		if is_equal_approx(input_dir.x, 0.0) && is_equal_approx(input_dir.y, 0.0):

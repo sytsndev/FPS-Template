@@ -16,6 +16,7 @@ class_name Player extends CharacterBody3D
 @export var camera_manager: CameraManager
 @export var left_wall_run_rays: Array[RayCast3D]
 @export var right_wall_run_rays: Array[RayCast3D]
+@export var grapple_cast: RayCast3D
 
 @onready var wall_run_container: Node3D = $Neck/WallRun
 
@@ -42,6 +43,7 @@ func _process(delta: float) -> void:
 
 func setup():
 	camera.position = player_res.camera_pos
+	grapple_cast.target_position = player_res.grapple_dist
 
 #endregion
 
@@ -112,6 +114,9 @@ func state_wall_run():
 	if !player_res.wall_run:
 		return false
 	return (left_wall_run_rays.all(func(ray): return ray.is_colliding()) or right_wall_run_rays.all(func(ray): return ray.is_colliding())) and wr_reset_timer == 0.0
+
+func state_grapple():
+	return Input.is_action_just_pressed("grapple") and grapple_cast.is_colliding()
 
 #endregion
 

@@ -9,6 +9,7 @@ const DOUBLE_JUMP = "DoubleJump"
 const DASH = "Dash"
 const SLIDING = "Sliding"
 const WALL_RUN = "WallRun"
+const GRAPPLE = "Grapple"
 
 enum MovementType { 
 	WISH_DIR,

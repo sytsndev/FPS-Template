@@ -77,3 +77,7 @@ enum MovementType {
 @export_category("Player Movement Variables")
 @export var max_double_jump_count: float = 1
 @export var max_dash_count: float = 2
+
+
+@export_category("Grapple")
+@export var grapple_dist: Vector3

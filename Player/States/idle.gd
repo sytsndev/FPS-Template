@@ -9,6 +9,8 @@ func physics_update(_delta: float) -> void:
 
 	if not player.is_on_floor():
 		finished.emit(FALLING)
+	elif player.state_grapple():
+		finished.emit(GRAPPLE)
 	elif player.state_jump():
 		finished.emit(JUMPING)
 	elif player.state_sprint():

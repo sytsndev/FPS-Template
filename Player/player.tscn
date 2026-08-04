@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://dswanda68gj6v" path="res://Player/Scripts/movement.gd" id="11_apopc"]
 [ext_resource type="Script" uid="uid://dvddh4ejtaq1r" path="res://Player/States/wall_run.gd" id="11_dkpta"]
 [ext_resource type="Script" uid="uid://cdbu1kklfiir6" path="res://Player/Scripts/Camera/camera_manager.gd" id="12_p5o4e"]
+[ext_resource type="Script" uid="uid://c4f3rnst8min8" path="res://Player/States/grapple.gd" id="12_pisgm"]
 [ext_resource type="Script" uid="uid://c2nd28uhevxrj" path="res://Player/control.gd" id="16_lfmf2"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_s1fef"]
@@ -25,7 +26,7 @@ points = PackedVector3Array(-0.5, -0.5, 0, -0.49765074, -0.5, -0.049040705, -0.4
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vtle1"]
 height = 1.0
 
-[node name="Player" type="CharacterBody3D" unique_id=1866795079 node_paths=PackedStringArray("neck", "camera", "crouch_shape_cast", "collision_shape", "player_mesh", "movement", "camera_lean", "camera_manager", "left_wall_run_rays", "right_wall_run_rays")]
+[node name="Player" type="CharacterBody3D" unique_id=1866795079 node_paths=PackedStringArray("neck", "camera", "crouch_shape_cast", "collision_shape", "player_mesh", "movement", "camera_lean", "camera_manager", "left_wall_run_rays", "right_wall_run_rays", "grapple_cast")]
 script = ExtResource("1_fhl08")
 neck = NodePath("Neck")
 camera = NodePath("Neck/CameraSpring/CameraLean/CameraContainer")
@@ -38,6 +39,7 @@ camera_lean = NodePath("Neck/CameraSpring/CameraLean")
 camera_manager = NodePath("Neck/CameraSpring/CameraLean/CameraContainer/Camera3D")
 left_wall_run_rays = [NodePath("Neck/WallRun/LeftLow"), NodePath("Neck/WallRun/LeftHigh")]
 right_wall_run_rays = [NodePath("Neck/WallRun/RightLow"), NodePath("Neck/WallRun/RightHigh")]
+grapple_cast = NodePath("Neck/CameraSpring/CameraLean/CameraContainer/GrappleCast")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1519460414]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -75,6 +77,9 @@ script = ExtResource("10_gu6f8")
 [node name="WallRun" type="Node" parent="StateMachine" unique_id=168475959]
 script = ExtResource("11_dkpta")
 
+[node name="Grapple" type="Node" parent="StateMachine" unique_id=828211619]
+script = ExtResource("12_pisgm")
+
 [node name="Neck" type="Node3D" parent="." unique_id=825116909]
 
 [node name="CameraSpring" type="Node3D" parent="Neck" unique_id=257365407]
@@ -88,6 +93,8 @@ script = ExtResource("10_x3vf3")
 [node name="Camera3D" type="Camera3D" parent="Neck/CameraSpring/CameraLean/CameraContainer" unique_id=48079509]
 fov = 90.0
 script = ExtResource("12_p5o4e")
+
+[node name="GrappleCast" type="RayCast3D" parent="Neck/CameraSpring/CameraLean/CameraContainer" unique_id=997315077]
 
 [node name="WallRun" type="Node3D" parent="Neck" unique_id=1001257661]
 
