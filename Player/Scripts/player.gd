@@ -116,6 +116,8 @@ func state_wall_run():
 	return (left_wall_run_rays.all(func(ray): return ray.is_colliding()) or right_wall_run_rays.all(func(ray): return ray.is_colliding())) and wr_reset_timer == 0.0
 
 func state_grapple():
+	if !player_res.grapple:
+		return false
 	return Input.is_action_just_pressed("grapple") and grapple_cast.is_colliding()
 
 #endregion

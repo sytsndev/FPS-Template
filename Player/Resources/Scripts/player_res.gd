@@ -21,6 +21,7 @@ enum MovementType {
 @export var slide: bool
 @export var dash: bool
 @export var double_jump: bool
+@export var grapple: bool
 
 @export_category("Player Settings")
 @export var mouse_sens: float

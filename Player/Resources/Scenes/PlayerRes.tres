@@ -11,6 +11,7 @@ wall_run = true
 slide = true
 dash = true
 double_jump = true
+grapple = true
 mouse_sens = 0.8
 wall_run_reset_jump = true
 c_lean = true
