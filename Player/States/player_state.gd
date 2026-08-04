@@ -10,6 +10,11 @@ const DASH = "Dash"
 const SLIDING = "Sliding"
 const WALL_RUN = "WallRun"
 
+enum MovementType { 
+	WISH_DIR,
+	FLOATY
+	}
+
 var player: Player
 
 func _ready() -> void:

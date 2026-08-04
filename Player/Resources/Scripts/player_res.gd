@@ -6,6 +6,10 @@ enum SlideType {
 	GLIDE_SLIDE
 	}
 
+enum MovementType { 
+	WISH_DIR,
+	FLOATY
+	}
 
 @export_category("Player Setup")
 @export var camera_pos: Vector3
@@ -32,8 +36,23 @@ enum SlideType {
 @export var wall_run_delay: float = 0.5
 
 @export_category("Running")
+@export var movement_type: MovementType
 @export var speed: float = 10.0
 @export var crouch_speed: float = 6.0
+@export var auto_bhop: bool = true
+@export var toggle_sprint: bool
+
+
+@export_category("Air Movement")
+@export var air_cap: float = 0.85
+@export var air_accel: float = 800.0
+@export var air_move_speed: float = 500.0
+
+@export_category("Ground Movement")
+@export var ground_accel: float = 14.0
+@export var ground_decel: float = 10.0
+@export var ground_friction: float = 6.0
+
 
 @export_category("Sprint")
 @export var sprint_speed: float = 14.0

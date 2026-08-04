@@ -5,7 +5,11 @@ func enter(previous_state_path: String, data := {}) -> void:
 func physics_update(delta: float) -> void:
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	var direction := (player.neck.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	player.movement.fall_move(direction, delta)
+	
+	if player.player_res.movement_type == MovementType.FLOATY:
+		player.movement.fall_move(direction, delta)
+	if player.player_res.movement_type == MovementType.WISH_DIR:
+		player.movement.air_wish_dir_move(delta, input_dir)
 	
 	if player.state_wall_run():
 		finished.emit(WALL_RUN)

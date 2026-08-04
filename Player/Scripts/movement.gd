@@ -199,3 +199,64 @@ func get_wall_info(wall_normal: Vector3, side: String):
 		"run_dir": along_wall,
 		"rays": rays
 	}
+
+
+func wish_dir_move(delta: float, input_dir: Vector2, speed: float):
+	var prev_velocity := player.velocity
+	
+	var wish_dir = player.neck.basis * Vector3(input_dir.x, 0.0, input_dir.y)
+	var cur_speed_in_wish_dir = player.velocity.dot(wish_dir)
+	var add_speed_till_cap = speed - cur_speed_in_wish_dir
+
+	if add_speed_till_cap > 0:
+		var accel_speed = player.player_res.air_accel * delta * speed
+		accel_speed = min(accel_speed, add_speed_till_cap)
+		player.velocity += accel_speed * wish_dir
+
+	var control = max(player.velocity.length(), player.player_res.ground_decel)
+	var drop = control * player.player_res.ground_friction * delta
+	var new_speed = max(player.velocity.length() - drop, 0.0)
+	if player.velocity.length() > 0:
+		new_speed /= player.velocity.length()
+	player.velocity *= new_speed
+	
+	player.move_and_slide()
+	
+	var acceleration := (player.velocity - prev_velocity) / delta
+	if player.player_res.c_lean:
+		player.camera_lean.update_lean(delta, acceleration, Vector3.UP)
+
+
+func air_wish_dir_move(delta: float, input_dir: Vector2):
+	var prev_velocity := player.velocity
+	
+	player.velocity.y += player.player_res.gravity * delta
+	var wish_dir = player.neck.basis * Vector3(input_dir.x, 0.0, input_dir.y)
+	
+	var cur_speed_in_wish_dir = player.velocity.dot(wish_dir)
+	var capped_speed = min((player.player_res.air_move_speed * wish_dir).length(), player.player_res.air_cap)
+	var add_speed_till_cap = capped_speed - cur_speed_in_wish_dir
+	if add_speed_till_cap > 0:
+		var accel_speed = player.player_res.air_accel * player.player_res.air_move_speed * delta
+		accel_speed = min(accel_speed, add_speed_till_cap)
+		player.velocity += accel_speed * wish_dir
+	
+	player.move_and_slide()
+	
+	var acceleration := (player.velocity - prev_velocity) / delta
+	if player.player_res.c_lean:
+		player.camera_lean.update_lean(delta, acceleration, Vector3.UP)
+
+
+func stop_player(delta: float):
+	var prev_velocity := player.velocity
+	
+	player.velocity.y += player.player_res.gravity * delta
+	player.velocity.x = move_toward(player.velocity.x, 0, player.player_res.ground_decel)
+	player.velocity.z = move_toward(player.velocity.z, 0, player.player_res.ground_decel)
+	player.move_and_slide()
+	#climbing_ray_look_at()
+	
+	var acceleration := (player.velocity - prev_velocity) / delta
+	if player.player_res.c_lean:
+		player.camera_lean.update_lean(delta, acceleration, Vector3.UP)

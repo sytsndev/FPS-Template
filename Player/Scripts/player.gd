@@ -83,6 +83,8 @@ func exit_crouch():
 func state_jump():
 	if !player_res.double_jump and !is_on_floor():
 		return false
+	if player_res.auto_bhop and Input.is_action_pressed("jump") and is_on_floor():
+		return true
 	return Input.is_action_just_pressed("jump") and player_res.max_double_jump_count > d_jump_count
 
 func state_run():
